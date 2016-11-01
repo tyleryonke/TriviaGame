@@ -1,11 +1,3 @@
-window.onload = function(){
-	$('#instructions').show();
-	$('#startButton').show();
-	$('#picSpace').hide();
-	$('#answers').hide();
-	$('#startButton').click(timer.timerStart);
-};
-
 var question1 = {
 	question: "1. Which of these U.S. Presidents appeared on the television series Laugh-In?",
 	answer1: "Lyndon Johnson",
@@ -110,169 +102,134 @@ var correct;
 var incorrect;
 var unanswered;
 
-var currentQuestion;
-var currentCorrectAnswer;
-
 var timer = {
-	time:20,
-	timerStart: function(){
-		$('#timer').html("Time Remaining:  " + timer.time + " seconds");
+    time:20,
+    timerStart: function(){
+        $('#timer').html("Time Remaining:  " + timer.time + " seconds");
         counter = setInterval(timer.count, 1000);
     },
     count: function(){
         timer.time--;
         $('#timer').html("Time Remaining:  " + timer.time + " seconds");
-        if (timer.time === 0) {
-        	timer.time = 25;
-        	unanswered++;
-        	$('#timer').hide();
-        	$('#answers').hide();
-        	$('#correctAnswer').show();
-        	$('#correctAnswer').html("The correct answer was:  " + currentQuestion.correctAnswer);
-        	$('#picSpace').show();
-        }
-        if (timer.time === 21) {
-        	if (currentQuestion === question10) {
-        		$('#correctAnswer').hide();
-        		$('#endStats').show();
-        		$('#endStats').html("Correct:  " + correct + "<br>Incorrect:  " + incorrect + "<br>Unanswered:  " + unanswered);
-        		$('#question').hide();
-        		$('#answers').hide();
-        		clearInterval(counter);
-        		timer.time = 20;
-        		$('#startButton').html("Restart the quiz!");
-        		$('#startButton').show();
-        		return;
-        	}
-        	timer.time = 20;
-        	if (currentQuestion === question9) {
-        		currentQuestion = question10;
-        	}
-        	if (currentQuestion === question8) {
-        		currentQuestion = question9;
-        	}
-        	if (currentQuestion === question7) {
-        		currentQuestion = question8;
-        	}
-        	if (currentQuestion === question6) {
-        		currentQuestion = question7;
-        	}
-        	if (currentQuestion === question5) {
-        		currentQuestion = question6;
-        	}
-        	if (currentQuestion === question4) {
-        		currentQuestion = question5;
-        	}
-        	if (currentQuestion === question3) {
-        		currentQuestion = question4;
-        	}
-        	if (currentQuestion === question2) {
-        		currentQuestion = question3;
-        	}
-        	if (currentQuestion === question1) {
-        		currentQuestion = question2;
-        	}
-        	$('#correctAnswer').hide();
-        	$('#timer').show();
-        	$('#question').show();
-        		$('#question').html(currentQuestion.question);
-        	$('#answers').show();
-        		$('#answer1').html(currentQuestion.answer1);
-				$('#answer2').html(currentQuestion.answer2);
-				$('#answer3').html(currentQuestion.answer3);
-				$('#answer4').html(currentQuestion.answer4);
-			currentCorrectAnswer = currentQuestion.correctAnswer;
-			$('#answerPic').attr('src', currentQuestion.picsrc);
-			$('#picSpace').hide();
-        }
+        timeOut();
     }
 }
 
-$('#startButton').on('click', function gameStart() {
-	correct = 0;
-	incorrect = 0;
-	unanswered = 0;
-	$('#instructions').hide();
-	$('#startButton').hide();
-	$('#timer').show();
-	currentQuestion = question1;
-	$('#question').show();
-		$('#question').html(currentQuestion.question);
-	$('#answers').show();
-		$('#answer1').html(currentQuestion.answer1);
-		$('#answer2').html(currentQuestion.answer2);
-		$('#answer3').html(currentQuestion.answer3);
-		$('#answer4').html(currentQuestion.answer4);
-	currentCorrectAnswer = currentQuestion.correctAnswer;
-	$('#answerPic').attr('src', currentQuestion.picsrc);
-	$('#picSpace').hide();
-	$('#correctAnswer').hide();
-	$('#endStats').hide();
+window.onload = function(){
+    $('#picSpace').hide();
+    $('#answers').hide();
+    introSound.play();
+};
+
+$('#startButton').click( function gameStart() {
+    timer.timerStart();
+    introSound.pause();
+	introSound.currentTime = 0;
+    outroSound.pause();
+	outroSound.currentTime = 0;
+    correct = 0;
+    incorrect = 0;
+    unanswered = 0;
+    currentQuestion = question1;
+    currentCorrectAnswer = currentQuestion.correctAnswer;
+
+    $('#instructions').hide();
+    $('#startButton').hide();
+    $('#endStats').hide();
+    newQuestionDisplay();
 })
 
 $('.answerText').on('click', function selectAnswer() {
-	var selectedAnswer = $(this).html();
-	timer.time = 25;
-    $('#timer').hide();
-    $('#answers').hide();
-    $('#correctAnswer').show();
-    $('#picSpace').show();
-    if (selectedAnswer == currentCorrectAnswer) {
-    	correct++;
-    	$('#correctAnswer').html("Correct! The answer was:  " + currentQuestion.correctAnswer);
-    }
-    else {
-    	incorrect++;
-    	$('#correctAnswer').html("Incorrect! The correct answer was:  " + currentQuestion.correctAnswer);
-    }
-    if (timer.time === 21) {
-        if (currentQuestion === question10) {
-        	$('#endStats').show();
-        	$('#endStats').html("Correct:  " + correct + "<br>Incorrect:  " + incorrect + "<br>Unanswered:  " + unanswered);
-        	$('#question').hide();
-        	$('#answers').hide();
-        	$('#startButton').show();
-        	return;
+    var selectedAnswer = $(this).html();
+        timer.time = 24;
+        $('#timer').hide();
+        $('#answers').hide();
+        $('#correctAnswer').show();
+        $('#picSpace').show();
+        if (selectedAnswer == currentCorrectAnswer) {
+            correct++;
+            correctSound.play();
+            $('#correctAnswer').html("Correct! The answer was:  " + currentQuestion.correctAnswer);
         }
-        timer.time = 20;
+        else {
+            incorrect++;
+            incorrectSound.play();
+            $('#correctAnswer').html("Incorrect! The correct answer was:  " + currentQuestion.correctAnswer);
+        }
+        setTimeout(function(){
+        nextQuestion();
+        }, 4000);
+})
+
+timeOut = function(){
+        if (timer.time === 0) {
+            timer.time = 24;
+            unanswered++;
+            $('#timer').hide();
+            $('#answers').hide();
+            $('#correctAnswer').show();
+            $('#correctAnswer').html("The correct answer was:  " + currentQuestion.correctAnswer);
+            $('#picSpace').show();
+            setTimeout(function(){
+            nextQuestion();
+            }, 4000);
+        }
+}
+
+nextQuestion = function(){
+        if (currentQuestion === question10) {
+            $('#question').hide();
+            $('#correctAnswer').hide();
+            $('#picSpace').hide();
+            $('#startButton').show();
+            $('#startButton').html("Restart the quiz!");
+            $('#endStats').show();
+            $('#endStats').html("Correct:  " + correct + "<br>Incorrect:  " + incorrect + "<br>Unanswered:  " + unanswered);
+            outroSound.play();
+            clearInterval(counter);   
+            return;
+            }
         if (currentQuestion === question9) {
-        	currentQuestion = question10;
+            currentQuestion = question10;
         }
         if (currentQuestion === question8) {
-        	currentQuestion = question9;
+            currentQuestion = question9;
         }
         if (currentQuestion === question7) {
-        		currentQuestion = question8;
+            currentQuestion = question8;
         }
         if (currentQuestion === question6) {
-        		currentQuestion = question7;
+            currentQuestion = question7;
         }
         if (currentQuestion === question5) {
-        		currentQuestion = question6;
+            currentQuestion = question6;
         }
         if (currentQuestion === question4) {
-        		currentQuestion = question5;
+            currentQuestion = question5;
         }
         if (currentQuestion === question3) {
-        		currentQuestion = question4;
+            currentQuestion = question4;
         }
         if (currentQuestion === question2) {
-        		currentQuestion = question3;
+            currentQuestion = question3;
         }
         if (currentQuestion === question1) {
-        		currentQuestion = question2;
+            currentQuestion = question2;
         }
-        $('#correctAnswer').hide();
-        $('#timer').show();
-        $('#question').show();
-        	$('#question').html(currentQuestion.question);
-        $('#answers').show();
-        	$('#answer1').html(currentQuestion.answer1);
-			$('#answer2').html(currentQuestion.answer2);
-			$('#answer3').html(currentQuestion.answer3);
-			$('#answer4').html(currentQuestion.answer4);
-		currentCorrectAnswer = currentQuestion.correctAnswer;
-		$('#answerPic').attr('src', currentQuestion.picsrc);
-		$('#picSpace').hide();
-	}
-})
+        newQuestionDisplay();
+}
+
+newQuestionDisplay = function(){
+    $('#correctAnswer').hide();
+    $('#picSpace').hide();
+    $('#timer').show();
+    $('#question').show();
+        $('#question').html(currentQuestion.question);
+    $('#answers').show();
+        $('#answer1').html(currentQuestion.answer1);
+        $('#answer2').html(currentQuestion.answer2);
+        $('#answer3').html(currentQuestion.answer3);
+        $('#answer4').html(currentQuestion.answer4);
+    currentCorrectAnswer = currentQuestion.correctAnswer;
+    $('#answerPic').attr('src', currentQuestion.picsrc);
+}

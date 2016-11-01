@@ -10,22 +10,40 @@
 	<title>Who Wants To Be A Millionaire Trivia</title>
 </head>
 <body>
-	<div id='header'><h1>WHO WANTS TO BE A MILLIONAIRE?</h1></div>
-	<div id='instructions'><p>See if you deserve a million dollars!</p><p>All questions in this quiz netted the contestant the grand prize of $1,000,000 (or local equivalent).</p><p>Good luck!</p><br><br></div>
+	<div id='header'><br><h1 id='headerText'>WHO WANTS TO BE A MILLIONAIRE?</h1></div>
+	<div id='instructions'><br><br><p>See if you deserve a million dollars!</p><p>All questions in this quiz netted the contestant the grand prize of $1,000,000 (or local equivalent).</p><p>Unfortunately for you, though, you don't get any lifelines!</p><p>Good luck!</p><br><br><br></div>
 	<button id='startButton'>Start the quiz!</button>
 	<div id='timer'></div>
 		<br>
 	<div id='question'></div>
 		<br>
 	<div id='answers'>
-		<div class='answer'><span class='answerText' id='answer1'></span></div>
-		<div class='answer' id='answerBox2'><span class='answerText' id='answer2'></span></div>
-		<div class='answer'><span class='answerText' id='answer3'></span></div>
-		<div class='answer' id='answerBox4'><span class='answerText' id='answer4'></span></div>
+		<hr id='hr1'><hr id='hr2'>
+		<div class='answer octagon'><span class='answerText' id='answer1'></span></div>
+		<div class='answer octagon' id='answerBox2'><span class='answerText' id='answer2'></span></div>
+		<div class='answer octagon'><span class='answerText' id='answer3'></span></div>
+		<div class='answer octagon' id='answerBox4'><span class='answerText' id='answer4'></span></div>
 	</div>
 	<div id='correctAnswer'></div>
 	<div id='picSpace'><img id='answerPic' src=''></div>
 	<div id='endStats'></div>
+
+	<audio id="introSound">
+	    <source src="assets/intro.mp3" type="audio/mp3">
+	</audio>
+
+	<audio id="correctSound">
+	    <source src="assets/correct.mp3" type="audio/mp3">
+	</audio>
+
+	<audio id="incorrectSound">
+	    <source src="assets/incorrect.mp3" type="audio/mp3">
+	</audio>
+
+	<audio id="outroSound">
+	    <source src="assets/outro.mp3" type="audio/mp3">
+	</audio>
+
 </body>
 <script src=assets/javascript/app.js></script>
 </html>

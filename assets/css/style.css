@@ -3,6 +3,7 @@ body {
 	background-color: #34094C;
 	font-family: 'Exo', sans-serif;
 	color: white;
+	position: relative;
 }
 
 h1 {
@@ -13,8 +14,14 @@ h1 {
 img {
 	display: block;
 	margin: 10px auto;
-	height: 200px;
-	width: 200px;
+	max-width: 300px;
+}
+
+button {
+	font-family: 'Exo', sans-serif;
+	font-size: 30px;
+	color: white;
+	background-color: black;
 }
 
 #answers {
@@ -29,8 +36,7 @@ img {
 	margin: 10px;
 	width: 200px;
 	height: 50px;
-	border-style: solid;
-	border-color: black;
+	color: white;
 }
 
 #answerBox2, #answerBox4 {
@@ -44,10 +50,83 @@ img {
 	vertical-align: middle;
 }
 
-.answer:hover { 
+.answer:hover {
 	color: black;
-    background-color: yellow;
-    height: 50px;
-    width: 300px;
-    font-size: 35px;
+    font-weight: bolder;
+}
+
+.octagon {
+	width: 200px;
+	height: 50px;
+	position: relative;
+}
+
+.octagon:before {
+	content: "";
+	position: absolute;
+	top: 5px;
+	left: 0;
+	border-bottom: 20px solid black;
+	border-left: 29px solid #34094c;
+	border-right: 29px solid #34094c;
+	width: 144px;
+	height: 0;
+	z-index: -1;
+}
+
+.octagon:after {
+	content: "";
+	position: absolute;
+	bottom: 5px;
+	left: 0;
+	border-top: 20px solid black;
+	border-left: 29px solid #34094c;
+	border-right: 29px solid #34094c;
+	width: 144px;
+	height: 0;
+	z-index: -1;
+}
+
+.octagon:hover::before{
+	border-bottom: 20px solid yellow;
+}
+
+.octagon:hover::after{
+	border-top: 20px solid yellow;
+}
+
+hr {
+	z-index: -1;
+	border-color: black;
+	width: 3000px;
+	position: fixed;
+	margin-left: -405px;
+}
+
+#hr1 {
+	top: 53.1%;
+}
+
+#hr2 {
+	top: 63.7%;
+}
+
+@media screen and (max-width: 1300px) {
+	#hr1 {
+		top: 69.2%;
+	}
+
+	#hr2 {
+		top: 79.7%;
+	}
+}
+
+@media screen and (max-width: 705px) {
+	#hr1 {
+		top: 85.2%;
+	}
+
+	#hr2 {
+		top: 95.7%;
+	}
 }
