@@ -1,0 +1,53 @@
+body {
+	text-align: center;
+	background-color: #34094C;
+	font-family: 'Exo', sans-serif;
+	color: white;
+}
+
+h1 {
+	font-size: 80px;
+	text-decoration: underline;
+}
+
+img {
+	display: block;
+	margin: 10px auto;
+	height: 200px;
+	width: 200px;
+}
+
+#answers {
+	display: block;
+	margin: auto;
+	width: 600px;
+	height: 250px;
+}
+
+.answer {
+	float: left;
+	margin: 10px;
+	width: 200px;
+	height: 50px;
+	border-style: solid;
+	border-color: black;
+}
+
+#answerBox2, #answerBox4 {
+	float: right;
+	clear: bottom;
+}
+
+.answerText {
+	display: inline-block;
+	line-height: 50px;
+	vertical-align: middle;
+}
+
+.answer:hover { 
+	color: black;
+    background-color: yellow;
+    height: 50px;
+    width: 300px;
+    font-size: 35px;
+}
