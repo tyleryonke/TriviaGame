@@ -15,6 +15,7 @@ img {
 	display: block;
 	margin: 10px auto;
 	max-width: 300px;
+	max-height: 250px;
 }
 
 button {
@@ -22,6 +23,11 @@ button {
 	font-size: 30px;
 	color: white;
 	background-color: black;
+}
+
+button:hover {
+	color: black;
+	background-color: yellow;
 }
 
 #answers {
@@ -104,20 +110,20 @@ hr {
 }
 
 #hr1 {
-	top: 53.1%;
+	top: 54.9%;
 }
 
 #hr2 {
-	top: 63.7%;
+	top: 65.7%;
 }
 
 @media screen and (max-width: 1300px) {
 	#hr1 {
-		top: 69.2%;
+		top: 71.3%;
 	}
 
 	#hr2 {
-		top: 79.7%;
+		top: 82.3%;
 	}
 }
 
