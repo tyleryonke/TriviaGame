@@ -184,7 +184,7 @@ nextQuestion = function(){
             $('#startButton').show();
             $('#startButton').html("Restart the quiz!");
             $('#endStats').show();
-            $('#endStats').html("Correct:  " + correct + "<br>Incorrect:  " + incorrect + "<br>Unanswered:  " + unanswered);
+            $('#endStats').html("<br><br>Correct:  " + correct + "<br>Incorrect:  " + incorrect + "<br>Unanswered:  " + unanswered);
             outroSound.play();
             clearInterval(counter);   
             return;

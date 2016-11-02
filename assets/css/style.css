@@ -4,11 +4,12 @@ body {
 	font-family: 'Exo', sans-serif;
 	color: white;
 	position: relative;
+	height: 100%;
 }
 
 h1 {
 	font-size: 80px;
-	text-decoration: underline;
+	text-decoration: underline overline;
 }
 
 img {
@@ -110,20 +111,20 @@ hr {
 }
 
 #hr1 {
-	top: 54.9%;
+	top: 352px;
 }
 
 #hr2 {
-	top: 65.7%;
+	top: 422px;
 }
 
 @media screen and (max-width: 1300px) {
 	#hr1 {
-		top: 71.3%;
+		top: 458px;
 	}
 
 	#hr2 {
-		top: 82.3%;
+		top: 528px;
 	}
 }
 
